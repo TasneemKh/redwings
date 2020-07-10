@@ -34,7 +34,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
         {
             //open main activity
             //it need to  changed
-            Intent intent = new Intent(SignIn.this ,Add_Request_Activity.class);
+            Intent intent = new Intent(SignIn.this ,profileActivity.class);
             startActivity(intent);
         }
         initializeUI();
@@ -65,23 +65,23 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                             Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_LONG).show();
                             FirebaseUser user = mAuth.getCurrentUser();
                             //change it into main activity
-                            Intent intent = new Intent(SignIn.this, Add_Request_Activity.class);
+                            Intent intent = new Intent(SignIn.this, profileActivity.class);
                             startActivity(intent);
                         }
                         else {
-                          //  Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                                View coordinatorLayout = null;
-                                Snackbar snackbar = Snackbar
-                                        .make(coordinatorLayout, "Email or Password is incorrect ", Snackbar.LENGTH_LONG)
-                                        .setAction("RETRY", new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View view) {
-                                                emailTxt.getText().clear();
-                                                passTxt.getText().clear();
-                                            }
-                                        });
+                            Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                           /* View coordinatorLayout = null;
+                            Snackbar snackbar = Snackbar
+                                    .make(coordinatorLayout, "Email or Password is incorrect ", Snackbar.LENGTH_LONG)
+                                    .setAction("RETRY", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            emailTxt.getText().clear();
+                                            passTxt.getText().clear();
+                                        }
+                                    });
 
-                                snackbar.show();
+                            snackbar.show();*/
 
                         }
                     }
@@ -138,9 +138,9 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
     public boolean onTouchEvent(MotionEvent touchEvent) {
         switch(touchEvent.getAction()) {
             case MotionEvent.ACTION_DOWN:
-               x1=touchEvent.getX();
-               y1=touchEvent.getY();
-               break;
+                x1=touchEvent.getX();
+                y1=touchEvent.getY();
+                break;
             case MotionEvent.ACTION_UP:
                 x2=touchEvent.getX();
                 y2=touchEvent.getY();

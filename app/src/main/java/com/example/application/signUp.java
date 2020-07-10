@@ -7,7 +7,9 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +22,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,14 +33,26 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class signUp extends AppCompatActivity implements View.OnClickListener  {
     DatePickerDialog picker;
-    EditText birthTxt ,emailTxt,passwordTxt,userName;
+    EditText birthTxt,emailTxt,passwordTxt,userName;
     private FirebaseAuth mAuth;
     private Button regBtn;
+    TextInputLayout email,name,password;
     private static final String TAG = signUp.class.getSimpleName();
     float x1,y1,x2,y2;
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
+                    //"(?=.*[0-9])" +         //at least 1 digit
+                    //"(?=.*[a-z])" +         //at least 1 lower case letter
+                    //"(?=.*[A-Z])" +         //at least 1 upper case letter
+                    "(?=.*[a-zA-Z])" +      //any letter
+                    "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                    "(?=\\S+$)" +           //no white spaces
+                    ".{4,}" +               //at least 4 characters
+                    "$");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,18 +80,108 @@ public class signUp extends AppCompatActivity implements View.OnClickListener  {
             }
         });
         mAuth = FirebaseAuth.getInstance();
-        userName= findViewById(R.id.username);
+      /*  userName= findViewById(R.id.username);
         emailTxt = findViewById(R.id.emailAddress);
-        passwordTxt = findViewById(R.id.passTxt);
+        passwordTxt = findViewById(R.id.passTxt);*/
+
+        email=findViewById(R.id.e_mail);
+        name=findViewById(R.id.name);
+        password=findViewById(R.id.password);
+
         findViewById(R.id.back).setOnClickListener(this);
         findViewById(R.id.signIn).setOnClickListener(this);
         regBtn = findViewById(R.id.sign_up);
         regBtn.setOnClickListener(new View.OnClickListener(){
+
             @Override
             public void onClick(View v) {
+                if (!validateEmail() | !validateUsername() | !validatePassword()) {
+                    return;
+                }
                 doSignUp(emailTxt.getText().toString().trim(), passwordTxt.getText().toString().trim());
             }
         });
+    }
+    /*
+     Date current = newDate.getTime();
+             int diff1 =new Date().compareTo(current);
+
+                if(diff1<0){
+                    Toast.makeText(getActivity(), "Please select a valid date",  Toast.LENGTH_LONG).show();
+                    return;
+                }
+                else{
+                    et_dob.setText(dateFormatter.format(newDate.getTime()));
+                }
+   private void validData(){
+        if (isEmpty(userName) | isEmpty(emailTxt) | isEmpty(passwordTxt) |isEmpty(birthTxt)) {
+            Snackbar.make(regBtn, "please fill out all required fields ", Snackbar.LENGTH_LONG).show();
+            isValid=false;
+        }
+        if(isEmail(emailTxt)){
+           String strPattern="[a-zA-Z.\\s]+ -";
+            if ( userName.getText().toString().trim().matches(strPattern)) {
+                isValid = true;}
+            else{
+                userName.setError("username contains letters,or dot or whitespaces.");
+                isValid=false;
+            }
+        }else {
+            // R.id.name.error = "Enter valid email";
+            emailTxt.setError("Enter valid email!");
+            isValid=false;
+        }
+
+    }
+/*
+    boolean isEmpty(EditText text) {
+        CharSequence str = text.getText().toString();
+        return TextUtils.isEmpty(str);
+    }
+    boolean isEmail(EditText text) {
+        CharSequence email = text.getText().toString();
+        return (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
+    }
+*/
+    private boolean validateEmail() {
+        email=findViewById(R.id.e_mail);
+        String emailInput = email.getEditText().getText().toString().trim();
+        if (emailInput.isEmpty()) {
+            emailTxt.setError("Field can't be empty");
+            return false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
+            emailTxt.setError("Please enter a valid email address");
+            return false;
+        } else {
+            emailTxt.setError(null);
+            return true;
+        }
+    }
+    private boolean validateUsername() {
+        String usernameInput = name.getEditText().getText().toString().trim();
+        if (usernameInput.isEmpty()) {
+            name.setError("Field can't be empty");
+            return false;
+        } else if (usernameInput.length() > 15) {
+            name.setError("Username too long");
+            return false;
+        } else {
+            name.setError(null);
+            return true;
+        }
+    }
+    private boolean validatePassword() {
+        String passwordInput = password.getEditText().getText().toString().trim();
+        if (passwordInput.isEmpty()) {
+            password.setError("Field can't be empty");
+            return false;
+        } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
+            password.setError("Password too weak");
+            return false;
+        } else {
+            password.setError(null);
+            return true;
+        }
     }
     private void doSignUp(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -103,7 +209,7 @@ public class signUp extends AppCompatActivity implements View.OnClickListener  {
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-                                            Intent intent = new Intent(signUp.this , Add_Request_Activity.class);
+                                            Intent intent = new Intent(signUp.this , profileActivity.class);
                                             startActivity(intent);
                                         }
                                     });

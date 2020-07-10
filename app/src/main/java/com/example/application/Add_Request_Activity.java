@@ -22,8 +22,6 @@ RadioButton radioOpos;
                 BottomSheetDialog bottomSheetDialog=new BottomSheetDialog(Add_Request_Activity.this);
                 bottomSheetDialog.setContentView(R.layout.blood_type);
 
-
-
             }
         });
     }
@@ -37,7 +35,7 @@ RadioButton radioOpos;
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.close:
-                startActivity(new Intent(this,first_Tab.class));
+                startActivity(new Intent(this,profileActivity.class));
                 break;
             default:
                 break;

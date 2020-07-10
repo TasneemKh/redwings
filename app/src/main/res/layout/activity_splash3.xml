@@ -6,12 +6,11 @@
     android:layout_height="match_parent"
     android:background="@color/colorLight"
     android:padding="24dp"
-    tools:context=".splash0">
+    >
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="340dp"
-        android:layout_height="330dp"
+        style="@style/imageSlider"
         android:contentDescription="@string/donate_process_chart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,26 +22,16 @@
 
     <TextView
         android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:gravity="center"
+        style="@style/headerSlider"
         android:text="@string/splash3"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="24sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <TextView
         android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
+        style="@style/TxtSlider"
         android:text="@string/splash3Txt"
-        android:textColor="@color/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />

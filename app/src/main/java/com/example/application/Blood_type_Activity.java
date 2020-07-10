@@ -28,31 +28,31 @@ public class Blood_type_Activity extends AppCompatActivity {
                 break;
             case R.id.radioOneg:
                 if(checked)
-                    str = "AngularJS Selected";
+                    str = "O neg";
                 break;
             case R.id.radioApos:
                 if(checked)
-                    str = "Java Selected";
+                    str = "A pos";
                 break;
             case R.id.radioAneg:
                 if(checked)
-                    str = "Python Selected";
+                    str = "A neg";
                 break;
             case R.id.radioBpos:
                 if(checked)
-                    str = "eee Selected";
+                    str = "B pos";
                 break;
             case R.id.radioBneg:
                 if(checked)
-                    str = "Pyteewhon Selected";
+                    str = "B neg";
                 break;
             case R.id.radioABpos:
                 if(checked)
-                    str = "fd Selected";
+                    str = "AB pos";
                 break;
             case R.id.radioABneg:
                 if(checked)
-                    str = "f Selected";
+                    str = "ABneg";
                 break;
         }
 

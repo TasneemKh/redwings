@@ -40,7 +40,10 @@
                 android:layout_marginTop="16dp"
                 android:textColorHint="@color/colorPrimaryDark"
                 app:boxBackgroundColor="@color/colorLight"
-                app:boxStrokeColor="@color/colorPrimaryDark">
+                app:boxStrokeColor="@color/colorPrimaryDark"
+                app:errorEnabled="true"
+                app:boxStrokeErrorColor="#FFFFFF"
+                app:errorTextColor="@color/colorPrimaryDark">
 
                 <EditText
                     android:id="@+id/username"
@@ -60,7 +63,9 @@
                 android:textColorHint="@color/colorPrimaryDark"
                 app:boxBackgroundColor="@color/colorLight"
                 app:boxStrokeColor="@color/colorPrimaryDark"
-                app:endIconMode="clear_text">
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                >
 
                 <EditText
                     android:id="@+id/emailAddress"
@@ -78,6 +83,7 @@
                 android:layout_marginTop="24dp"
                 android:textColorHint="@color/colorPrimaryDark"
                 app:boxBackgroundColor="@color/colorLight"
+                app:errorEnabled="true"
                 app:endIconMode="password_toggle">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -92,6 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                app:errorEnabled="true"
                 android:textColorHint="@color/colorPrimaryDark"
                 app:boxBackgroundColor="@color/colorLight">
 
